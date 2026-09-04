@@ -51,7 +51,7 @@ export default function Skills() {
 
       <div className="mt-10">
         <p className="mb-4 font-mono text-[11px] tracking-[0.15em] text-ink/50 uppercase">
-          Picked up shipping the Ask Me Anything project
+          Currently learning
         </p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           {EXPANDING.map((skill) => (

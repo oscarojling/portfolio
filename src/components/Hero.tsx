@@ -42,28 +42,25 @@ export default function Hero() {
 
         <div className="order-1 md:order-2">
           <h1 className="font-display text-4xl leading-[1.08] font-semibold tracking-tight text-ink md:text-5xl">
-            Building where communication meets code.
+            Oscar Öjling
           </h1>
+          <p className="mt-2 font-mono text-sm tracking-[0.02em] text-pine">
+            Frontend Developer student at Futuregames
+          </p>
 
           <div className="mt-6 space-y-4 max-w-xl text-[15px] leading-relaxed text-ink/75">
             <p>
-              I hold a degree in Communications from Umeå University. After
-              graduating I worked at KMH — the Royal College of Music in
-              Stockholm — maintaining the internal site: publishing news,
-              writing articles, interviewing people across the organization.
-              That's where the pull toward programming started.
+              Hello! I'm Oscar, a frontend developer student at Futuregames,
+              based in Stockholm. I hold a degree in Communications from
+              Umeå University and worked at KMH — the Royal College of
+              Music — maintaining their internal site, which is where my
+              interest in programming started.
             </p>
             <p>
-              I'm now in my second year of the Frontend Developer program at
-              Futuregames, currently deep in a databases course. Comfortable
-              with TypeScript, JavaScript, React, Next.js, jQuery, HTML/CSS,
-              and Node.js — and adding to that list with every project.
-            </p>
-            <p>
-              I don't see the communications background as a detour.
-              Development is drifting toward more fluid, cross-functional
-              work as AI reshapes the job, and making sure a team actually
-              understands each other matters more, not less, in that shift.
+              I'm now in my second year, currently taking a databases
+              course, and comfortable with TypeScript, JavaScript, React,
+              Next.js, jQuery, HTML/CSS, and Node.js. Always eager to learn
+              new technologies and grow as a developer.
             </p>
           </div>
 
