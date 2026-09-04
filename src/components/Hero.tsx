@@ -44,29 +44,23 @@ export default function Hero() {
           <h1 className="font-display text-4xl leading-[1.08] font-semibold tracking-tight text-ink md:text-5xl">
             Building where communication meets code.
           </h1>
-          <p className="mt-5 max-w-xl text-lg text-ink/80">
-            Frontend developer in training, based in Stockholm — spent years
-            making sure people understood each other before turning to making
-            machines understand people.
-          </p>
 
-          <div className="mt-8 space-y-4 max-w-xl text-[15px] leading-relaxed text-ink/75">
+          <div className="mt-6 space-y-4 max-w-xl text-[15px] leading-relaxed text-ink/75">
             <p>
-              Oscar holds a degree in Communications from Umeå University.
-              After graduating he worked at KMH — the Royal College of Music
-              in Stockholm — maintaining the internal site: publishing news,
+              I hold a degree in Communications from Umeå University. After
+              graduating I worked at KMH — the Royal College of Music in
+              Stockholm — maintaining the internal site: publishing news,
               writing articles, interviewing people across the organization.
               That's where the pull toward programming started.
             </p>
             <p>
-              He's now in his second year of the Frontend Developer program
-              at Futuregames, currently deep in a databases course.
-              Comfortable with TypeScript, JavaScript, React, Next.js,
-              jQuery, HTML/CSS, and Node.js — and adding to that list with
-              every project.
+              I'm now in my second year of the Frontend Developer program at
+              Futuregames, currently deep in a databases course. Comfortable
+              with TypeScript, JavaScript, React, Next.js, jQuery, HTML/CSS,
+              and Node.js — and adding to that list with every project.
             </p>
             <p>
-              He doesn't see the communications background as a detour.
+              I don't see the communications background as a detour.
               Development is drifting toward more fluid, cross-functional
               work as AI reshapes the job, and making sure a team actually
               understands each other matters more, not less, in that shift.

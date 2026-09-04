@@ -20,7 +20,7 @@ const BASE_PROJECTS: Project[] = [
   {
     name: "Ask Me Anything",
     description:
-      "An AI chatbot embedded on Oscar's site that answers recruiter questions about him directly — background, skills, projects. Built with Next.js, the Vercel AI SDK streaming a Claude model, Drizzle + Postgres, and better-auth.",
+      "An AI chatbot embedded on my site that answers recruiter questions about me directly — background, skills, projects. Built with Next.js, the Vercel AI SDK streaming a Claude model, Drizzle + Postgres, and better-auth.",
     githubLink: "https://github.com/oscarojling/ask-me-anything",
     featured: true,
   },
@@ -91,7 +91,7 @@ export default function Projects() {
       </h2>
       <p className="mt-4 max-w-xl text-[15px] text-ink/70">
         A mix of solo and group builds — the latest being an AI chatbot
-        trained on his own background.
+        trained on my own background.
       </p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2">

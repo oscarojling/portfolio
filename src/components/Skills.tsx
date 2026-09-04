@@ -7,6 +7,7 @@ const CORE = [
   { name: "React", note: "Component-driven UIs" },
   { name: "Next.js", note: "App router, API routes" },
   { name: "Node.js", note: "Server-side JavaScript" },
+  { name: "Tailwind CSS", note: "Utility-first styling" },
   { name: "jQuery", note: "DOM work on legacy stacks" },
   { name: "Git & GitHub", note: "Version control, collaboration" },
 ];
@@ -15,7 +16,6 @@ const EXPANDING = [
   { name: "Postgres & Drizzle ORM", note: "Schema, queries, migrations" },
   { name: "better-auth", note: "Auth flows for a real app" },
   { name: "Vercel AI SDK", note: "Streaming a Claude-powered chat" },
-  { name: "Tailwind CSS", note: "Utility-first styling at speed" },
 ];
 
 function SkillCard({ name, note }: { name: string; note: string }) {
