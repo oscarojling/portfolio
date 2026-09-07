@@ -1,15 +1,26 @@
 import Section from "./Section";
 
-const CORE = [
+const FRONTEND = [
   { name: "HTML & CSS", note: "Flexbox, Grid, responsive layouts" },
   { name: "JavaScript", note: "DOM, events, working with APIs" },
   { name: "TypeScript", note: "Typed components and app logic" },
   { name: "React", note: "Component-driven UIs" },
+  { name: "React Router", note: "Client-side routing" },
   { name: "Next.js", note: "App router, API routes" },
-  { name: "Node.js", note: "Server-side JavaScript" },
-  { name: "Tailwind CSS", note: "Utility-first styling" },
   { name: "jQuery", note: "DOM work on legacy stacks" },
+  { name: "Tailwind CSS", note: "Utility-first styling" },
+  { name: "Material UI", note: "Component library" },
+  { name: "CSS Modules", note: "Scoped component styles" },
+];
+
+const BACKEND_AND_TOOLS = [
+  { name: "Node.js", note: "Server-side JavaScript" },
+  { name: "Express", note: "REST APIs on Node" },
+  { name: "EJS", note: "Server-rendered templates" },
   { name: "Git & GitHub", note: "Version control, collaboration" },
+  { name: "Jest", note: "Unit testing" },
+  { name: "Figma", note: "Design handoff, prototyping" },
+  { name: "Vercel", note: "Deploys & hosting" },
 ];
 
 const EXPANDING = [
@@ -40,10 +51,21 @@ export default function Skills() {
 
       <div className="mt-10">
         <p className="mb-4 font-mono text-[11px] tracking-[0.15em] text-ink/50 uppercase">
-          Core
+          Frontend
         </p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-          {CORE.map((skill) => (
+          {FRONTEND.map((skill) => (
+            <SkillCard key={skill.name} {...skill} />
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-10">
+        <p className="mb-4 font-mono text-[11px] tracking-[0.15em] text-ink/50 uppercase">
+          Backend &amp; tools
+        </p>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+          {BACKEND_AND_TOOLS.map((skill) => (
             <SkillCard key={skill.name} {...skill} />
           ))}
         </div>
