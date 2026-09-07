@@ -16,14 +16,24 @@ interface Project {
   featured?: boolean;
 }
 
-const BASE_PROJECTS: Project[] = [
-  {
-    name: "Ask Me Anything",
-    description:
-      "An AI chatbot embedded on my site that answers recruiter questions about me directly — background, skills, projects. Built with Next.js, the Vercel AI SDK streaming a Claude model, Drizzle + Postgres, and better-auth.",
-    githubLink: "https://github.com/oscarojling/ask-me-anything",
-    featured: true,
-  },
+interface GithubRepo {
+  name: string;
+  description: string | null;
+  homepage: string | null;
+  html_url: string;
+  fork: boolean;
+  pushed_at: string;
+  topics?: string[];
+}
+
+const GITHUB_USER = "oscarojling";
+// Any repo tagged with this topic on GitHub shows up here automatically —
+// no code changes needed to add a new project to the site.
+const FEATURE_TOPIC = "portfolio";
+
+// Two group projects that live under teammates' GitHub accounts, so they
+// can't be discovered from oscarojling's own repo list — pinned by hand.
+const PINNED: Project[] = [
   {
     name: "Australian Zoo",
     description:
@@ -42,38 +52,60 @@ const BASE_PROJECTS: Project[] = [
   },
 ];
 
-const PENALTY_FALLBACK: Project = {
-  name: "Penalty Game",
-  description:
-    "An interactive penalty shootout game built with JavaScript, where you take turns as both the shooter and the goalkeeper — reflexes and strategy in a turn-based football game.",
-  image: penaltyImg,
-  githubLink: "https://github.com/oscarojling/Improved-penalty-game",
-};
+// Shown until repos are tagged "portfolio" on GitHub (see FEATURE_TOPIC
+// above) — once tagged, the live fetch replaces these automatically.
+const FALLBACK: Project[] = [
+  {
+    name: "Ask Me Anything",
+    description:
+      "An AI chatbot embedded on my site that answers recruiter questions about me directly — background, skills, projects. Built with Next.js, the Vercel AI SDK streaming a Claude model, Drizzle + Postgres, and better-auth.",
+    githubLink: `https://github.com/${GITHUB_USER}/ask-me-anything`,
+    featured: true,
+  },
+  {
+    name: "Penalty Game",
+    description:
+      "An interactive penalty shootout game built with JavaScript, where you take turns as both the shooter and the goalkeeper — reflexes and strategy in a turn-based football game.",
+    image: penaltyImg,
+    githubLink: `https://github.com/${GITHUB_USER}/Improved-penalty-game`,
+  },
+];
+
+function humanize(repoName: string) {
+  return repoName
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
 
 export default function Projects() {
-  const [projects, setProjects] = useState<Project[]>([
-    ...BASE_PROJECTS,
-    PENALTY_FALLBACK,
-  ]);
+  const [autoProjects, setAutoProjects] = useState<Project[] | null>(null);
 
-  // Mirrors the original site's trick: pull the live homepage URL straight
-  // from the GitHub API instead of hardcoding it.
   useEffect(() => {
     let cancelled = false;
 
-    fetch("https://api.github.com/users/oscarojling/repos?sort=updated&per_page=20")
+    fetch(
+      `https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=100`,
+    )
       .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .then((repos: Array<{ name: string; homepage?: string; html_url: string }>) => {
+      .then((repos: GithubRepo[]) => {
         if (cancelled) return;
-        const repo = repos.find((r) => r.name === "Improved-penalty-game");
-        if (!repo) return;
-        setProjects((prev) =>
-          prev.map((p) =>
-            p.name === "Penalty Game"
-              ? { ...p, liveLink: repo.homepage || undefined, githubLink: repo.html_url }
-              : p,
-          ),
-        );
+        const tagged = repos
+          .filter((r) => !r.fork && r.topics?.includes(FEATURE_TOPIC))
+          .sort(
+            (a, b) =>
+              new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime(),
+          )
+          .map(
+            (r, i): Project => ({
+              name: humanize(r.name),
+              description: r.description || "No description added on GitHub yet.",
+              image: `https://opengraph.githubassets.com/1/${GITHUB_USER}/${r.name}`,
+              githubLink: r.html_url,
+              liveLink: r.homepage || undefined,
+              featured: i === 0,
+            }),
+          );
+        if (tagged.length > 0) setAutoProjects(tagged);
       })
       .catch(() => {
         /* keep the fallback data */
@@ -84,14 +116,19 @@ export default function Projects() {
     };
   }, []);
 
+  const projects = [...(autoProjects ?? FALLBACK), ...PINNED];
+
   return (
     <Section id="projects" index="03" label="Projects">
       <h2 className="font-display text-3xl font-semibold tracking-tight text-ink md:text-4xl">
         Recent work
       </h2>
       <p className="mt-4 max-w-xl text-[15px] text-ink/70">
-        A mix of solo and group builds — the latest being an AI chatbot
-        trained on my own background.
+        Pulled straight from GitHub — tag a repo{" "}
+        <code className="rounded bg-paper-2 px-1.5 py-0.5 font-mono text-[13px]">
+          {FEATURE_TOPIC}
+        </code>{" "}
+        and it shows up here.
       </p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2">
@@ -131,7 +168,7 @@ export default function Projects() {
                   </span>
                 )}
               </div>
-              <p className="mt-2 flex-1 text-sm text-ink/70">
+              <p className="mt-2 line-clamp-4 flex-1 text-sm text-ink/70">
                 {project.description}
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
