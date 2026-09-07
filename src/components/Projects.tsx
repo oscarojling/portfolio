@@ -3,8 +3,6 @@ import { ExternalLink } from "lucide-react";
 import Section from "./Section";
 import { GithubIcon } from "./BrandIcons";
 import AmaGraphic from "./AmaGraphic";
-import zooImg from "../assets/images/zoo-project.webp";
-import pokemonImg from "../assets/images/pokemon-project.webp";
 import penaltyImg from "../assets/images/penalty-game.webp";
 
 interface Project {
@@ -31,37 +29,12 @@ const GITHUB_USER = "oscarojling";
 // no code changes needed to add a new project to the site.
 const FEATURE_TOPIC = "portfolio";
 
-// Group projects that live under teammates' GitHub accounts, pinned by
-// hand for now. Fork one of these into oscarojling's account and tag the
-// fork "portfolio" (see FEATURE_TOPIC above) and it'll start showing up
-// twice — once here, once from the live fetch. Delete its entry below
-// once it's forked and tagged.
-const PINNED: Project[] = [
-  {
-    name: "HSS Sailing Scouts",
-    description:
-      "A group project building a responsive website for Hässelby Strands Sjöscoutkår, translating a fellow student's design into a working site with agile development and iterative client feedback. Built with Next.js, TypeScript, and Tailwind, with multi-language support, an Instagram feed, and Google Maps integration.",
-    image: "https://opengraph.githubassets.com/1/Callum-Jones230893/HSS-Group-Activity",
-    liveLink: "https://hss-group-activity.vercel.app/",
-    githubLink: "https://github.com/Callum-Jones230893/HSS-Group-Activity",
-  },
-  {
-    name: "Australian Zoo",
-    description:
-      "A group project building a multi-page website for an Australian zoo. Built with HTML, CSS, and JavaScript, featuring dynamic animal displays and a full SCRUM workflow.",
-    image: zooImg,
-    liveLink: "https://assignment3-zoo.vercel.app/",
-    githubLink: "https://github.com/SgnCycles/FG-Assignment3-Zoo",
-  },
-  {
-    name: "Pokemon Project",
-    description:
-      "A group project building a Pokemon information app that fetches data from the PokeAPI — browse and discover Pokemon with detailed stats, abilities, and descriptions.",
-    image: pokemonImg,
-    liveLink: "https://pokemon-project-nu.vercel.app/",
-    githubLink: "https://github.com/besethda/Pokemon-Project",
-  },
-];
+// Group projects that live under teammates' GitHub accounts go here only
+// if they can't be forked into oscarojling's own account — a fork tagged
+// "portfolio" (see FEATURE_TOPIC above) is picked up by the live fetch
+// instead, no entry needed. Zoo, Pokemon, and HSS have all been forked
+// and tagged, so this list is empty for now.
+const PINNED: Project[] = [];
 
 // Shown until repos are tagged "portfolio" on GitHub (see FEATURE_TOPIC
 // above) — once tagged, the live fetch replaces these automatically.
