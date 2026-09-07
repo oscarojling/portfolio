@@ -31,9 +31,17 @@ const GITHUB_USER = "oscarojling";
 // no code changes needed to add a new project to the site.
 const FEATURE_TOPIC = "portfolio";
 
-// Two group projects that live under teammates' GitHub accounts, so they
+// Group projects that live under teammates' GitHub accounts, so they
 // can't be discovered from oscarojling's own repo list — pinned by hand.
 const PINNED: Project[] = [
+  {
+    name: "HSS Sailing Scouts",
+    description:
+      "A group project building a responsive website for Hässelby Strands Sjöscoutkår, translating a fellow student's design into a working site with agile development and iterative client feedback. Built with Next.js, TypeScript, and Tailwind, with multi-language support, an Instagram feed, and Google Maps integration.",
+    image: "https://opengraph.githubassets.com/1/Callum-Jones230893/HSS-Group-Activity",
+    liveLink: "https://hss-group-activity.vercel.app/",
+    githubLink: "https://github.com/Callum-Jones230893/HSS-Group-Activity",
+  },
   {
     name: "Australian Zoo",
     description:
