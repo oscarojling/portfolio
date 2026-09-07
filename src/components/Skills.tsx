@@ -19,6 +19,7 @@ const BACKEND_AND_TOOLS = [
   { name: "EJS", note: "Server-rendered templates" },
   { name: "Git & GitHub", note: "Version control, collaboration" },
   { name: "Jest", note: "Unit testing" },
+  { name: "Playwright", note: "End-to-end browser testing" },
   { name: "Figma", note: "Design handoff, prototyping" },
   { name: "Vercel", note: "Deploys & hosting" },
 ];
