@@ -3,6 +3,7 @@ import { ExternalLink } from "lucide-react";
 import Section from "./Section";
 import { GithubIcon } from "./BrandIcons";
 import AmaGraphic from "./AmaGraphic";
+import RepoGraphic from "./RepoGraphic";
 import penaltyImg from "../assets/images/penalty-game.webp";
 
 interface Project {
@@ -36,10 +37,13 @@ const FEATURE_TOPIC = "portfolio";
 // and tagged, so this list is empty for now.
 const PINNED: Project[] = [];
 
-// Shown until repos are tagged "portfolio" on GitHub (see FEATURE_TOPIC
-// above) — once tagged, the live fetch replaces these automatically.
-const FALLBACK: Project[] = [
+// Shown per-project until that specific repo is tagged "portfolio" on
+// GitHub (see FEATURE_TOPIC above) — once tagged, the live fetch takes
+// over for that one repo, matched by repoName below. Other fallback
+// entries stay put; tagging one repo should never hide another.
+const FALLBACK: (Project & { repoName: string })[] = [
   {
+    repoName: "ask-me-anything",
     name: "Ask Me Anything",
     description:
       "An AI chatbot embedded on my site that answers recruiter questions about me directly — background, skills, projects. Built with Next.js, the Vercel AI SDK streaming a Claude model, Drizzle + Postgres, and better-auth.",
@@ -47,6 +51,7 @@ const FALLBACK: Project[] = [
     featured: true,
   },
   {
+    repoName: "Improved-penalty-game",
     name: "Penalty Game",
     description:
       "An interactive penalty shootout game built with JavaScript, where you take turns as both the shooter and the goalkeeper — reflexes and strategy in a turn-based football game.",
@@ -62,7 +67,10 @@ function humanize(repoName: string) {
 }
 
 export default function Projects() {
-  const [autoProjects, setAutoProjects] = useState<Project[] | null>(null);
+  const [taggedProjects, setTaggedProjects] = useState<Project[]>([]);
+  const [taggedRepoNames, setTaggedRepoNames] = useState<Set<string>>(
+    new Set(),
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -73,10 +81,12 @@ export default function Projects() {
       .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
       .then((repos: GithubRepo[]) => {
         if (cancelled) return;
-        const tagged = repos
+        const taggedRepos = repos.filter((r) =>
           // Forks are allowed through too — the "portfolio" topic tag is
           // the real gate, so a tagged fork of a group project counts.
-          .filter((r) => r.topics?.includes(FEATURE_TOPIC))
+          r.topics?.includes(FEATURE_TOPIC),
+        );
+        const tagged = [...taggedRepos]
           .sort(
             (a, b) =>
               new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime(),
@@ -85,13 +95,13 @@ export default function Projects() {
             (r, i): Project => ({
               name: humanize(r.name),
               description: r.description || "No description added on GitHub yet.",
-              image: `https://opengraph.githubassets.com/1/${GITHUB_USER}/${r.name}`,
               githubLink: r.html_url,
               liveLink: r.homepage || undefined,
               featured: i === 0,
             }),
           );
-        if (tagged.length > 0) setAutoProjects(tagged);
+        setTaggedProjects(tagged);
+        setTaggedRepoNames(new Set(taggedRepos.map((r) => r.name)));
       })
       .catch(() => {
         /* keep the fallback data */
@@ -102,7 +112,18 @@ export default function Projects() {
     };
   }, []);
 
-  const projects = [...(autoProjects ?? FALLBACK), ...PINNED];
+  // A fallback entry only steps aside once its own repo is confirmed
+  // tagged — tagging an unrelated repo never hides one that isn't.
+  const remainingFallback = FALLBACK.filter(
+    (f) => !taggedRepoNames.has(f.repoName),
+  ).map((f) => ({
+    ...f,
+    // Once any repo is tagged, the freshest tagged one wears the badge
+    // instead — otherwise Ask Me Anything keeps its default "featured".
+    featured: taggedProjects.length > 0 ? false : f.featured,
+  }));
+
+  const projects = [...taggedProjects, ...remainingFallback, ...PINNED];
 
   return (
     <Section id="projects" index="03" label="Projects">
@@ -139,8 +160,10 @@ export default function Projects() {
                   className="h-full w-full object-cover"
                   loading="lazy"
                 />
-              ) : (
+              ) : project.name === "Ask Me Anything" ? (
                 <AmaGraphic />
+              ) : (
+                <RepoGraphic seed={project.name} />
               )}
             </div>
             <div className="flex flex-1 flex-col p-5">
