@@ -31,8 +31,11 @@ const GITHUB_USER = "oscarojling";
 // no code changes needed to add a new project to the site.
 const FEATURE_TOPIC = "portfolio";
 
-// Group projects that live under teammates' GitHub accounts, so they
-// can't be discovered from oscarojling's own repo list — pinned by hand.
+// Group projects that live under teammates' GitHub accounts, pinned by
+// hand for now. Fork one of these into oscarojling's account and tag the
+// fork "portfolio" (see FEATURE_TOPIC above) and it'll start showing up
+// twice — once here, once from the live fetch. Delete its entry below
+// once it's forked and tagged.
 const PINNED: Project[] = [
   {
     name: "HSS Sailing Scouts",
@@ -98,7 +101,9 @@ export default function Projects() {
       .then((repos: GithubRepo[]) => {
         if (cancelled) return;
         const tagged = repos
-          .filter((r) => !r.fork && r.topics?.includes(FEATURE_TOPIC))
+          // Forks are allowed through too — the "portfolio" topic tag is
+          // the real gate, so a tagged fork of a group project counts.
+          .filter((r) => r.topics?.includes(FEATURE_TOPIC))
           .sort(
             (a, b) =>
               new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime(),
