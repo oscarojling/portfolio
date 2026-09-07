@@ -1,9 +1,5 @@
 import type { SVGProps } from "react";
 
-/**
- * lucide-react dropped brand/logo glyphs, so GitHub and LinkedIn are
- * hand-drawn here at the same stroke weight as the rest of the icon set.
- */
 export function GithubIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>

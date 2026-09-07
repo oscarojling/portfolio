@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "./BrandIcons";
+import { GithubIcon, LinkedinIcon } from "../BrandIcons";
 
 const LINKS = [
   { href: "#about", label: "About" },

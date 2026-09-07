@@ -1,15 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  /* -- color tokens ------------------------------------------------- */
-  --color-ink: #15181b;       /* primary text, warm charcoal */
-  --color-paper: #edefe6;     /* page background, cool stone (not cream) */
-  --color-paper-2: #e2e4d8;   /* slightly deeper panel background */
-  --color-accent: #e85d3c;    /* coral — the one bold move */
-  --color-pine: #1f6f5c;      /* secondary accent, links/hover */
-  --color-line: #cac6b6;      /* hairlines, connector traces */
+  --color-ink: #15181b;
+  --color-paper: #edefe6;
+  --color-paper-2: #e2e4d8;
+  --color-accent: #e85d3c;
+  --color-pine: #1f6f5c;
+  --color-line: #cac6b6;
 
-  /* -- type tokens ---------------------------------------------------*/
   --font-display: "Bricolage Grotesque", "Segoe UI", sans-serif;
   --font-body: "Inter", "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
@@ -59,9 +57,6 @@
 }
 
 @layer components {
-  /* Connector spine: the signature structural device. A thread that runs
-     the length of the page, with a joint dot at the head of each section —
-     a literal rendering of "figuring out how pieces fit together." */
   .joint {
     position: relative;
   }

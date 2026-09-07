@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
-import Section from "./Section";
-import { GithubIcon, LinkedinIcon } from "./BrandIcons";
-import portrait from "../assets/images/portrait.webp";
+import Section from "../Section";
+import { GithubIcon, LinkedinIcon } from "../BrandIcons";
+import portrait from "../../assets/images/portrait.webp";
 
 export default function Hero() {
   return (
@@ -52,14 +52,14 @@ export default function Hero() {
             <p>
               Hello! I'm Oscar, a frontend developer student at Futuregames,
               based in Stockholm. I hold a degree in Communications from
-              Umeå University and worked at KMH — the Royal College of
-              Music — maintaining their internal site, which is where my
-              interest in programming started.
+              Umeå University and worked at KMH, the Royal College of Music,
+              maintaining their internal site, which is where my interest
+              in programming started.
             </p>
             <p>
               I'm now in my second year, currently taking a databases
               course, and comfortable with TypeScript, JavaScript, React,
-              Next.js, jQuery, HTML/CSS, and Node.js. Always eager to learn
+              Next.js, HTML/CSS, and Node.js. Always eager to learn
               new technologies and grow as a developer.
             </p>
           </div>

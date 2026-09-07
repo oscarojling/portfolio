@@ -8,12 +8,6 @@ interface SectionProps {
   className?: string;
 }
 
-/**
- * Shared section shell. Renders the mono "01 — Label" kicker and the
- * accent joint-dot that sits on the connector spine running down the page —
- * the structural device that ties every section back to the same idea:
- * pieces, connected.
- */
 export default function Section({
   id,
   index,

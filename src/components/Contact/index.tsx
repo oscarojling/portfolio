@@ -1,6 +1,6 @@
 import { Mail } from "lucide-react";
-import Section from "./Section";
-import { GithubIcon, LinkedinIcon } from "./BrandIcons";
+import Section from "../Section";
+import { GithubIcon, LinkedinIcon } from "../BrandIcons";
 
 export default function Contact() {
   return (
@@ -11,7 +11,7 @@ export default function Contact() {
         </h2>
         <p className="mt-4 text-[15px] text-ink/70">
           Always up for collaborating on a project or talking through web
-          development — or, right now, hearing about internship openings.
+          development, or hearing about internship openings right now.
           Reach out anytime.
         </p>
 

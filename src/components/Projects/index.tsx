@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 import { ExternalLink } from "lucide-react";
-import Section from "./Section";
-import { GithubIcon } from "./BrandIcons";
-import AmaGraphic from "./AmaGraphic";
-import RepoGraphic from "./RepoGraphic";
-import penaltyImg from "../assets/images/penalty-game.webp";
-
-interface Project {
-  name: string;
-  description: string;
-  image?: string;
-  githubLink: string;
-  liveLink?: string;
-  featured?: boolean;
-}
+import Section from "../Section";
+import { GithubIcon } from "../BrandIcons";
+import AmaGraphic from "../AmaGraphic";
+import RepoGraphic from "../RepoGraphic";
+import {
+  FALLBACK,
+  FEATURE_TOPIC,
+  FEATURED,
+  GITHUB_USER,
+  PINNED,
+  humanize,
+  type Project,
+} from "../../data/projects";
 
 interface GithubRepo {
   name: string;
@@ -23,47 +22,6 @@ interface GithubRepo {
   fork: boolean;
   pushed_at: string;
   topics?: string[];
-}
-
-const GITHUB_USER = "oscarojling";
-// Any repo tagged with this topic on GitHub shows up here automatically —
-// no code changes needed to add a new project to the site.
-const FEATURE_TOPIC = "portfolio";
-
-// Group projects that live under teammates' GitHub accounts go here only
-// if they can't be forked into oscarojling's own account — a fork tagged
-// "portfolio" (see FEATURE_TOPIC above) is picked up by the live fetch
-// instead, no entry needed. Zoo, Pokemon, and HSS have all been forked
-// and tagged, so this list is empty for now.
-const PINNED: Project[] = [];
-
-// Shown per-project until that specific repo is tagged "portfolio" on
-// GitHub (see FEATURE_TOPIC above) — once tagged, the live fetch takes
-// over for that one repo, matched by repoName below. Other fallback
-// entries stay put; tagging one repo should never hide another.
-const FALLBACK: (Project & { repoName: string })[] = [
-  {
-    repoName: "ask-me-anything",
-    name: "Ask Me Anything",
-    description:
-      "An AI chatbot embedded on my site that answers recruiter questions about me directly — background, skills, projects. Built with Next.js, the Vercel AI SDK streaming a Claude model, Drizzle + Postgres, and better-auth.",
-    githubLink: `https://github.com/${GITHUB_USER}/ask-me-anything`,
-    featured: true,
-  },
-  {
-    repoName: "Improved-penalty-game",
-    name: "Penalty Game",
-    description:
-      "An interactive penalty shootout game built with JavaScript, where you take turns as both the shooter and the goalkeeper — reflexes and strategy in a turn-based football game.",
-    image: penaltyImg,
-    githubLink: `https://github.com/${GITHUB_USER}/Improved-penalty-game`,
-  },
-];
-
-function humanize(repoName: string) {
-  return repoName
-    .replace(/[-_]+/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 export default function Projects() {
@@ -82,8 +40,6 @@ export default function Projects() {
       .then((repos: GithubRepo[]) => {
         if (cancelled) return;
         const taggedRepos = repos.filter((r) =>
-          // Forks are allowed through too — the "portfolio" topic tag is
-          // the real gate, so a tagged fork of a group project counts.
           r.topics?.includes(FEATURE_TOPIC),
         );
         const tagged = [...taggedRepos]
@@ -92,38 +48,28 @@ export default function Projects() {
               new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime(),
           )
           .map(
-            (r, i): Project => ({
+            (r): Project => ({
               name: humanize(r.name),
               description: r.description || "No description added on GitHub yet.",
               githubLink: r.html_url,
               liveLink: r.homepage || undefined,
-              featured: i === 0,
             }),
           );
         setTaggedProjects(tagged);
         setTaggedRepoNames(new Set(taggedRepos.map((r) => r.name)));
       })
-      .catch(() => {
-        /* keep the fallback data */
-      });
+      .catch(() => {});
 
     return () => {
       cancelled = true;
     };
   }, []);
 
-  // A fallback entry only steps aside once its own repo is confirmed
-  // tagged — tagging an unrelated repo never hides one that isn't.
   const remainingFallback = FALLBACK.filter(
     (f) => !taggedRepoNames.has(f.repoName),
-  ).map((f) => ({
-    ...f,
-    // Once any repo is tagged, the freshest tagged one wears the badge
-    // instead — otherwise Ask Me Anything keeps its default "featured".
-    featured: taggedProjects.length > 0 ? false : f.featured,
-  }));
+  );
 
-  const projects = [...taggedProjects, ...remainingFallback, ...PINNED];
+  const projects = [FEATURED, ...taggedProjects, ...remainingFallback, ...PINNED];
 
   return (
     <Section id="projects" index="03" label="Projects">
@@ -131,11 +77,7 @@ export default function Projects() {
         Recent work
       </h2>
       <p className="mt-4 max-w-xl text-[15px] text-ink/70">
-        Pulled straight from GitHub — tag a repo{" "}
-        <code className="rounded bg-paper-2 px-1.5 py-0.5 font-mono text-[13px]">
-          {FEATURE_TOPIC}
-        </code>{" "}
-        and it shows up here.
+        A mix of coursework, group projects, and personal builds.
       </p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2">
@@ -153,14 +95,7 @@ export default function Projects() {
                   : "aspect-video w-full"
               }
             >
-              {project.image ? (
-                <img
-                  src={project.image}
-                  alt={`${project.name} preview`}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                />
-              ) : project.name === "Ask Me Anything" ? (
+              {project.name === "Ask Me Anything" ? (
                 <AmaGraphic />
               ) : (
                 <RepoGraphic seed={project.name} />
@@ -173,7 +108,7 @@ export default function Projects() {
                 </h3>
                 {project.featured && (
                   <span className="rounded-full bg-accent/15 px-2.5 py-0.5 font-mono text-[10px] tracking-[0.1em] text-accent uppercase">
-                    Latest build
+                    Featured
                   </span>
                 )}
               </div>

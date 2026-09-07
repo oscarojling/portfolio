@@ -1,4 +1,4 @@
-import Section from "./Section";
+import Section from "../Section";
 
 const FRONTEND = [
   { name: "HTML & CSS", note: "Flexbox, Grid, responsive layouts" },
