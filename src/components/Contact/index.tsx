@@ -1,4 +1,4 @@
-import { Mail } from "lucide-react";
+import { Mail, FileDown } from "lucide-react";
 import Section from "../Section";
 import { GithubIcon, LinkedinIcon } from "../BrandIcons";
 
@@ -22,6 +22,27 @@ export default function Contact() {
           <Mail size={14} />
           Send an email
         </a>
+
+        <div className="mt-4 flex items-center gap-5">
+          <a
+            href="/Oscar_Ojling_CV_EN.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 text-[13px] text-ink/70 transition-colors hover:text-accent"
+          >
+            <FileDown size={14} />
+            CV (English)
+          </a>
+          <a
+            href="/Oscar_Ojling_CV_SV.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 text-[13px] text-ink/70 transition-colors hover:text-accent"
+          >
+            <FileDown size={14} />
+            CV (Swedish)
+          </a>
+        </div>
 
         <div className="mt-8 flex items-center gap-5">
           <a
