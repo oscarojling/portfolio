@@ -57,10 +57,9 @@ export default function Hero() {
               in programming started.
             </p>
             <p>
-              I'm now in my second year, currently taking a databases
-              course, and comfortable with TypeScript, JavaScript, React,
-              Next.js, HTML/CSS, and Node.js. Always eager to learn
-              new technologies and grow as a developer.
+              I'm now in my second year, and comfortable with TypeScript,
+              JavaScript, React, Next.js, HTML/CSS, and Node.js. Always
+              eager to learn new technologies and grow as a developer.
             </p>
           </div>
 
