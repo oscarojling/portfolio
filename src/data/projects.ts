@@ -12,7 +12,7 @@ export const FEATURE_TOPIC = "portfolio";
 export const FEATURED: Project = {
   name: "Ask Me Anything",
   description:
-    "An AI chatbot embedded on my site that answers recruiter questions about me directly, covering my background, skills, and projects. It's built with Next.js, the Vercel AI SDK streaming a Claude model, Drizzle and Postgres, and better-auth.",
+    "A standalone AI chatbot that answers recruiter questions about me directly, covering my background, skills, and projects. It's built with Next.js, the Vercel AI SDK streaming a Claude model, Drizzle and Postgres via Supabase, and better-auth.",
   githubLink: `https://github.com/${GITHUB_USER}/ask-me-anything`,
   liveLink: "https://ask-me-anything-red.vercel.app/",
   featured: true,

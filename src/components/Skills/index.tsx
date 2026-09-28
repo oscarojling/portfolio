@@ -22,10 +22,8 @@ const BACKEND_AND_TOOLS = [
   { name: "Playwright", note: "End-to-end browser testing" },
   { name: "Figma", note: "Design handoff, prototyping" },
   { name: "Vercel", note: "Deploys & hosting" },
-];
-
-const EXPANDING = [
   { name: "Postgres & Drizzle ORM", note: "Schema, queries, migrations" },
+  { name: "Supabase", note: "Postgres hosting & auth" },
   { name: "better-auth", note: "Auth flows for a real app" },
   { name: "Vercel AI SDK", note: "Streaming a Claude-powered chat" },
 ];
@@ -72,16 +70,6 @@ export default function Skills() {
         </div>
       </div>
 
-      <div className="mt-10">
-        <p className="mb-4 font-mono text-[11px] tracking-[0.15em] text-ink/50 uppercase">
-          Currently learning
-        </p>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-          {EXPANDING.map((skill) => (
-            <SkillCard key={skill.name} {...skill} />
-          ))}
-        </div>
-      </div>
     </Section>
   );
 }
