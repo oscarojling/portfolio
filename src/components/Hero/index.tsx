@@ -58,8 +58,15 @@ export default function Hero() {
             </p>
             <p>
               I'm now in my second year, and comfortable with TypeScript,
-              JavaScript, React, Next.js, HTML/CSS, and Node.js. Always
-              eager to learn new technologies and grow as a developer.
+              JavaScript, React, Next.js, HTML/CSS, and Node.js.
+            </p>
+            <p>
+              What I like most about development is taking something from
+              idea to a finished product that actually works, most recently
+              the AI chatbot below, built with Next.js and Claude. The
+              developer role is also becoming more collaborative, and I
+              think my communication background gives me an eye for how
+              the user thinks and what they actually want.
             </p>
           </div>
 
