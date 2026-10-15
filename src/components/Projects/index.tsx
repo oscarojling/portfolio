@@ -112,7 +112,7 @@ export default function Projects() {
                   </span>
                 )}
               </div>
-              <p className="mt-2 line-clamp-4 flex-1 text-sm text-ink/70">
+              <p className="mt-2 line-clamp-6 flex-1 text-sm text-ink/70 sm:line-clamp-4">
                 {project.description}
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
