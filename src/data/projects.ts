@@ -35,6 +35,7 @@ export const FALLBACK: (Project & { repoName: string })[] = [
     description:
       "An interactive penalty shootout game built with JavaScript, where you take turns as both the shooter and the goalkeeper.",
     githubLink: `https://github.com/${GITHUB_USER}/Improved-penalty-game`,
+    liveLink: "https://oscarojling.github.io/Improved-penalty-game/",
   },
 ];
 
