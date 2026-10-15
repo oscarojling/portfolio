@@ -18,7 +18,15 @@ export const FEATURED: Project = {
   featured: true,
 };
 
-export const PINNED: Project[] = [];
+export const PINNED: Project[] = [
+  {
+    name: "GameStreet — Game On?",
+    description:
+      "A hackathon prototype built with another developer and two UX designers, presented to and well received by the client. GameStreet's gaming PCs were only bookable for group events with staff assistance — this reimagines that as self-service: scan a QR code on an open PC, choose and pay for playtime on your phone, and it unlocks automatically, with no booking, account, or staff needed.",
+    githubLink: "https://github.com/oscarojling/hackathon-gamestreet",
+    liveLink: "https://gamestreet-mobile.vercel.app/live",
+  },
+];
 
 export const FALLBACK: (Project & { repoName: string })[] = [
   {

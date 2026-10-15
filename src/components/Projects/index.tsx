@@ -69,7 +69,7 @@ export default function Projects() {
     (f) => !taggedRepoNames.has(f.repoName),
   );
 
-  const projects = [FEATURED, ...taggedProjects, ...remainingFallback, ...PINNED];
+  const projects = [FEATURED, ...PINNED, ...taggedProjects, ...remainingFallback];
 
   return (
     <Section id="projects" index="03" label="Projects">
