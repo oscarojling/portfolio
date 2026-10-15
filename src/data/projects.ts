@@ -22,7 +22,7 @@ export const PINNED: Project[] = [
   {
     name: "GameStreet - Hackathon",
     description:
-      "A hackathon prototype for GameStreet, built with another developer and two UX designers. Scan a QR code on an open gaming PC, pay for playtime on your phone, and it unlocks automatically, no booking or staff needed.",
+      "A hackathon prototype for GameStreet, built with another developer and two UX designers. Scan a QR code on an open gaming PC, pay for playtime on your phone, and it unlocks automatically.",
     githubLink: "https://github.com/oscarojling/hackathon-gamestreet",
     liveLink: "https://gamestreet-mobile.vercel.app/live",
   },
